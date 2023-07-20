@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "device_function_simulator.h": "c",
+        "getch.h": "c",
+        "opaygo_decoder.h": "c",
+        "device_payg_logic.h": "c",
+        "device_parameters.h": "c",
+        "opaygo_core.h": "c",
+        "stdint.h": "c",
+        "restricted_digit_set_mode.h": "c",
+        "stdio.h": "c"
+    }
+}

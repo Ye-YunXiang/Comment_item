@@ -1,0 +1,15 @@
+.vscode/
+.DS_Store
+*.asm
+*.bin
+*.cdb
+*.hex
+*.ihx
+*.lk
+*.lst
+*.map
+*.rel
+*.rst
+*.sym
+*.log
+*.ini
