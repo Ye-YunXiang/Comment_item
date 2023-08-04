@@ -161,17 +161,17 @@ MQTT_CLIENT_SET_STATEMENT(reconnect_try_duration, uint32_t)
 MQTT_CLIENT_SET_STATEMENT(reconnect_handler, reconnect_handler_t)
 MQTT_CLIENT_SET_STATEMENT(interceptor_handler, interceptor_handler_t)
 
-void mqtt_sleep_ms(int ms);
+void mqtt_sleep_ms(int ms);   // 主存储器睡眠
 mqtt_client_t *mqtt_lease(void);
-int mqtt_release(mqtt_client_t* c);
-int mqtt_connect(mqtt_client_t* c);
-int mqtt_disconnect(mqtt_client_t* c);
-int mqtt_keep_alive(mqtt_client_t* c);
-int mqtt_subscribe(mqtt_client_t* c, const char* topic_filter, mqtt_qos_t qos, message_handler_t msg_handler);
-int mqtt_unsubscribe(mqtt_client_t* c, const char* topic_filter);
-int mqtt_publish(mqtt_client_t* c, const char* topic_filter, mqtt_message_t* msg);
-int mqtt_list_subscribe_topic(mqtt_client_t* c);
-int mqtt_set_will_options(mqtt_client_t* c, char *topic, mqtt_qos_t qos, uint8_t retained, char *message);
+int mqtt_release(mqtt_client_t* c);  // 版本发布
+int mqtt_connect(mqtt_client_t* c);     // 连接
+int mqtt_disconnect(mqtt_client_t* c);  // 断开
+int mqtt_keep_alive(mqtt_client_t* c);  // 保持活动
+int mqtt_subscribe(mqtt_client_t* c, const char* topic_filter, mqtt_qos_t qos, message_handler_t msg_handler);      // 订阅
+int mqtt_unsubscribe(mqtt_client_t* c, const char* topic_filter);                                                   // 注销
+int mqtt_publish(mqtt_client_t* c, const char* topic_filter, mqtt_message_t* msg);                                  // 发布
+int mqtt_list_subscribe_topic(mqtt_client_t* c);                                                                    // 列表订阅主题
+int mqtt_set_will_options(mqtt_client_t* c, char *topic, mqtt_qos_t qos, uint8_t retained, char *message);          // 设置意愿选项
 
 #ifdef __cplusplus
 }
