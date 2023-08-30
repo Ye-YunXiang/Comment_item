@@ -1,0 +1,11 @@
+docs/*
+.vscode/*
+*.gcov
+*.gcda
+*.gcno
+*.swp
+*.xml
+*.ccls-root
+.ccls-cache/*
+*.config
+*.config.old
