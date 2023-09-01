@@ -7,7 +7,7 @@
 
 static bool quit = false;
 
-// fake product-side resources  伪造产品侧资源
+// fake product-side resources  伪造产品支持 资源
 static void stub_resource_get_handler(oc_request_t* request, oc_interface_mask_t interfaces, void* user_data)
 {
     (void) request;
@@ -29,9 +29,9 @@ static void stub_resource_post_handler(oc_request_t* request, oc_interface_mask_
  */
 int main(void)
 {
-    nx_common_init(0);
+    nx_common_init(0);          // 初始化运行时间
     // arbitrary 5 seconds  任意5秒
-    (void) nx_common_process(5);
+    (void) nx_common_process(5);        // nx 进程？？
 
 #if NEXUS_KEYCODE_ENABLED  //建码激活
     // simulate receiving a keycode  模拟接收钥匙码
