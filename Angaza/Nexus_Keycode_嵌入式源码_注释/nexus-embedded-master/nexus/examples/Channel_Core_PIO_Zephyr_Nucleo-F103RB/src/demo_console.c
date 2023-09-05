@@ -210,8 +210,8 @@ static bool _handle_check_payg_credit(char* cmd_string)
 }
 #endif // KEYCODE_SUPPORTED_DEMO_BUILD_ENABLED
 
-// Internal function taking a command string from the user, and
-// processing it.
+// Internal function taking a command string from the user, and   从用户获取命令字符串的内部函数
+// processing it.   处理它
 static void _demo_console_process_user_input(char* cmd_string)
 {
     LOG_INF("Processing input\n");
@@ -249,16 +249,20 @@ static void _demo_console_process_user_input(char* cmd_string)
 
 void demo_console_wait_for_user_input(void)
 {
+    // 初始化控制台
     if (!_initialized)
     {
         console_getline_init();
         _initialized = true;
     }
 
+    // 下面用来刷新日志
     // XXX wait for pending log statements to flush here
     printk("demo> ");
     // blocks waiting for input. Will only work on single-line ASCII string
     // input
+
+
     char* in_cmd = console_getline();
     memset(
         _demo_console_input_buffer, 0x00, sizeof(_demo_console_input_buffer));
@@ -267,5 +271,5 @@ void demo_console_wait_for_user_input(void)
            strnlen(in_cmd, sizeof(_demo_console_input_buffer)));
 
     // Process user input
-    _demo_console_process_user_input(_demo_console_input_buffer);
+    _demo_console_process_user_input(_demo_console_input_buffer);       // 处理用户输入
 }

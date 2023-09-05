@@ -195,3 +195,85 @@ This allows a demonstration of the Nexus Channel Secure Link functionality
 if you do not have access to physical development boards.
 
 XXX TODO
+
+
+# Nexus通道控制器示例
+
+演示在“控制器”设备上使用Nexus Channel的示例程序。
+运行在STM32F103RB单片机上，使用Zephyr RTOS。
+
+此演示项目不是独立的，并且旨在与
+“Nexus通道附件示例”演示运行另一个，单独
+董事会。
+
+# #目标
+
+STM32 Nucleo-F103RB开发板(STM32F103RB目标)，采用Zephyr RTOS
+为了便于演示和修改。
+
+这个项目依赖于Nucleo开发板的特点，
+特别是该板上ST-Link提供的虚拟COM端口。
+该接口用于开发板和主板之间的数据传输
+主机运行一个串行终端在**115200波特，8N1 UART。
+
+在Linux上，这*通常*显示为' /dev/ttyACM0 '后面的串行端口
+Nucleo-F103RB通过USB连接。
+
+##设置步骤
+
+1. [在VSCode中安装PlatformIO IDE](https://platformio.org/install/ide?install=vscode)
+2. 克隆这个Github存储库
+3.打开PlatformIO IDE，选择“Open Project”
+4. 通过选择名为“Nexus_Channel_Controller_F103RB”的目录打开项目。
+5. 将Nucleo-F103RB板连接到计算机上的USB端口
+6. 在IDE中打开PlatformIO透视图，然后单击“Clean”。
+7. 等待直到Clean完成，然后点击“Build”
+8. 等待直到Build完成，然后单击“Upload and Monitor”。
+9. 等到上传完成后，在IDE中观察终端。它应该提示输入
+10. 转到您正在运行的演示构建特定的步骤(如下)
+
+# #构建/运行
+
+本例配置为[PlatformIO](https://platformio.org/install)项目。
+您可以选择下载PlatformIO、下载这个示例项目和
+使用PlatformIO中的“添加现有”功能导入它。这将
+允许您修改、构建和下载您自己的代码
+核子- f103rb开发板。
+
+配置一个最小的控制台，以便当F103RB单板
+初始启动时，“——Nexus Channel Controller Demonstration——”将是
+打印到终端(连接USART2的虚拟COM端口上)。
+这可以用来确认单板上电和连接正确。
+
+此外，指示“demo>”的提示符将允许通过USART2输入文本
+控制台(如键码入口)。此功能由
+“demo_console”模块。
+
+为使Nexus工作，产品需要实现的功能
+正确地包含在' src/nxp_reference_implementations '文件夹中。
+
+在操作上，演示程序被构造成两个主要的Zephyr线程:
+
+1. 主要的线程。这将执行' main.c '中的' main '函数，并被使用
+初始化产品和Nexus功能，以及处理用户输入
+从' demo_console '。
+
+2. process_nexus线程。这个线程调用' nx_common_process '，并将
+调用' nxp_common_request_processing '时，将被唤醒并调用
+请求处理的Nexus库。任何CPU密集型操作
+由Nexus执行的操作都在这个线程中完成(以避免长时间运行的操作)
+在中断)。
+
+默认情况下，还会编译一个后台' logging '线程，它可以是
+通过在' zephyr/prj.conf '中设置' CONFIG_LOG=n '来禁用。如果此选项被禁用，
+通过USART2控制台的许多演示功能可能是无效的。
+但是，禁用日志记录将减少RAM和闪存的使用。
+
+默认的Zephyr ' idle '线程也存在，它负责放置
+当没有工作要处理时，CPU进入低功耗状态。
+
+可支持ST Nucleo-F103RB以外的开发板
+(但没有经过测试或正式支持)，并且可以通过修改
+' platformio.ini '文件的适当部分和相关的覆盖文件
+在“zephyr”文件夹中。有关移植的更多信息，请联系Angaza
+Zephyr示例到其他板/ mcu。
