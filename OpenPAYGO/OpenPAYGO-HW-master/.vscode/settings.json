@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "device_function_simulator.h": "c"
+        "device_function_simulator.h": "c",
+        "device_payg_logic.h": "c",
+        "opaygo_core.h": "c",
+        "opaygo_decoder.h": "c",
+        "cmath": "c",
+        "*.tcc": "c"
     }
 }
